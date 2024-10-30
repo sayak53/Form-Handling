@@ -1,19 +1,31 @@
+import { useEffect } from "react";
+import { useRef } from "react";
+
 const Form = () => {
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log(e.target.name.value);
-    console.log(e.target.email.value)
-    console.log(e.target.password.value)
-    console.log("form submitted");
-  };
+ 
+        const nameRef = useRef(null)
+        const emailRef = useRef(null)
+        const passwordRef = useRef(null)
+
+        const handleSubmit = e => {
+            e.preventDefault();
+            console.log(nameRef.current.value)
+            console.log(emailRef.current.value)
+            console.log(passwordRef.current.value)
+          };
+        useEffect(() => {
+            nameRef.current.focus()
+        },[])  
+
+
   return (
     <div>
       <form onSubmit={handleSubmit}>
-        <input type="text" name="name" placeholder="Enter your name" />
+        <input ref={nameRef} type="text" name="name" placeholder="Enter your name" />
         <br />
-        <input type="email" name="email" placeholder="Enter your email" />
+        <input ref={emailRef} type="email" name="email" placeholder="Enter your email" />
         <br />
-        <input type="password" name="password" placeholder="Enter your password"/>
+        <input ref={passwordRef} type="password" name="password" placeholder="Enter your password"/>
         <br />
         <input type="submit" value="Submit" />
       </form>
